@@ -1,12 +1,14 @@
 #include "neo4j_wrapper.hpp"
 
-
+//Dummy test case
 int main(int argc, char *argv[])
 {
 
     Neo4j_Wrapper::Neo4j_Connector connector;
     connector.connect();
-    connector.insert_pdg_node("test","a123=1","b123=a123+2");
+    connector.insert_pdg_node("012","DEFAULT","load i8*,i8** dummy_struct align 8, dbg! 651");
+    connector.insert_attack_graph_node(Neo4j_Wrapper::AttackState,"CCured","load i8*,i8** dummy_struct align 8");
+    connector.close();
 //    neo4j_client_init();
 //    /* use NEO4J_INSECURE when connecting to disable TLS  (7687 - ubuntu) (7474 - mac os x) */
 //    neo4j_connection_t *connection = neo4j_connect("neo4j://neo4j:secret@localhost:7474", NULL, NEO4J_INSECURE);
