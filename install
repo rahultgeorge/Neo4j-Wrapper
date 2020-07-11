@@ -16,7 +16,7 @@ sudo add-apt-repository ppa:cleishm/neo4j
 sudo apt-get update
 sudo apt-get install neo4j-client libneo4j-client-dev
 
- brew install cleishm/neo4j/neo4j-client
+
 
 # Install neo4j (3.5 cause of bolt dependency)
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo apt-key add -

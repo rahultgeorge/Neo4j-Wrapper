@@ -1,0 +1,4 @@
+/usr/local/lib/libneo4j_wrapper.1.0.0.dylib
+/usr/local/lib/libneo4j_wrapper.1.dylib
+/usr/local/lib/libneo4j_wrapper.dylib
+/usr/local/include/neo4j_wrapper.hpp
