@@ -81,7 +81,7 @@ int Neo4j_Wrapper::Neo4j_Connector::insert_attack_graph_node(AttackGraphNode att
        Key assumptions here
        1) Each attack state is only related to one data node
      */
-    statement += " CREATE ((node:"+ getStringEquivalent(attackGraphNode) +"{ label : \'"+ description +"\', instruction: \'"+instruction+"\'})-[:EDGE]->(p)) RETURN node";
+    statement += " CREATE ((node:AttackGraphNode{type:\""+getStringEquivalent(attackGraphNode)+"\",label : \'"+ description+" - "+instruction +"\'})-[:EDGE]->(p)) RETURN node";
     neo4j_result_stream_t *results = neo4j_run(connection,statement.c_str(),neo4j_null );
     if (results == NULL)
     {
