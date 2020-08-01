@@ -36,7 +36,7 @@ namespace Neo4j_Wrapper {
         int insert_pdg_edge(string node_source_label, string edge_label,
                             string node_dest_label);
 
-        int insert_pdg_node(string label, string node_type, string instruction, string function_name);
+        int insert_pdg_node(string label, string node_type, string instruction, string function_name, string program_name);
 
         int insert_attack_graph_node(AttackGraphNode attackGraphNode, string description, string instruction,string function_name ="NULL");
 

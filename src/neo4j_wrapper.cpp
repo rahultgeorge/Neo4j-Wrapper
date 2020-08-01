@@ -38,12 +38,12 @@ int Neo4j_Wrapper::Neo4j_Connector::insert_pdg_edge(string node_source_label, st
 
 
 int Neo4j_Wrapper::Neo4j_Connector::insert_pdg_node(string label, string node_type,
-                                                    string instruction, string function_name) {
+                                                    string instruction, string function_name, string program_name) {
     string debugLocation="-1";
     size_t pos = instruction.find("!dbg !");
     if(pos!=std::string::npos)
         debugLocation=instruction.substr(pos+6);
-    string statement="MERGE (n:ProgramInstruction{label:\'"+label+"\'}) ON MATCH SET n.type=\'"+node_type+"\', n.instruction=\'"+ instruction +"\', n.debug_location=\'"+debugLocation+"\', n.function_name=\'"+function_name +"\' ON CREATE SET n.type=\'" +node_type+"\', n.instruction=\'"+ instruction+"\', n.debug_location=\'"+debugLocation+"\', n.function_name=\'"+function_name+"\'";
+        string statement="MERGE (n:ProgramInstruction{label:\'"+label+"\'}) ON MATCH SET n.type=\'"+node_type+"\', n.instruction=\'"+ instruction +"\', n.debug_location=\'"+debugLocation+"\', n.function_name=\'"+function_name +"\', n.program_name=\'"+program_name+ +"\' ON CREATE SET n.type=\'" +node_type+"\', n.instruction=\'"+ instruction+"\', n.debug_location=\'"+debugLocation+"\', n.function_name=\'"+function_name+"\', n.program_name=\'"+program_name+"\'";
     neo4j_result_stream_t *results = neo4j_run(connection,statement.c_str(),neo4j_null );
     if (results == NULL)
     {
@@ -81,7 +81,7 @@ int Neo4j_Wrapper::Neo4j_Connector::insert_attack_graph_node(AttackGraphNode att
        Key assumptions here
        1) Each attack state is only related to one data node
      */
-    statement += " CREATE ((node:AttackGraphNode{type:\""+getStringEquivalent(attackGraphNode)+"\",label : \'"+ description+" - "+instruction +"\'})-[:EDGE]->(p)) RETURN node";
+    statement += " CREATE ((node:AttackGraphNode{type:\""+getStringEquivalent(attackGraphNode)+"\",label : \'"+ description+" - "+instruction +"\', program_name : \'p.program_name\'})-[:EDGE]->(p)) RETURN node";
     neo4j_result_stream_t *results = neo4j_run(connection,statement.c_str(),neo4j_null );
     if (results == NULL)
     {
