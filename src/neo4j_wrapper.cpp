@@ -63,19 +63,19 @@ bool is_number(const std::string& s)
 }
 
 
-int Neo4j_Wrapper::Neo4j_Connector::insert_attack_graph_node(AttackGraphNode attackGraphNode, string description, string instruction, string function_name)
+int Neo4j_Wrapper::Neo4j_Connector::insert_attack_graph_node(AttackGraphNode attackGraphNode, string description, string instruction, string function_name, string programName)
 {
     // Step 1: Find the underlying PDG node - Use the debug location if provided
     string statement;
     if(attackGraphNode==AttackState) {
         if (instruction.find("alloca") != std::string::npos)
             statement = " MATCH (p:ProgramInstruction) WHERE p.instruction CONTAINS  \'" + instruction +
-                        "\' AND p.function_name =\'" + function_name + "\'";
+                        "\' AND p.function_name =\'" + function_name + "\' AND p.program_name =\'"+programName+"\'";
         else //Regex instruction pattern
-            statement = " MATCH (p:ProgramInstruction) WHERE p.instruction =~\'" + instruction + "\'";
+            statement = " MATCH (p:ProgramInstruction) WHERE p.instruction =~\'" + instruction + "\' AND p.program_name =\'"+programName+"\'";
     }
     else
-        statement = " MATCH (p:ProgramInstruction) WHERE p.instruction CONTAINS  \'" + instruction + "\'";
+        statement = " MATCH (p:ProgramInstruction) WHERE p.instruction CONTAINS \'" + instruction + "\' AND p.program_name =\'"+programName+"\'";
 
     /* Step 2: Create the attack state
        Key assumptions here
