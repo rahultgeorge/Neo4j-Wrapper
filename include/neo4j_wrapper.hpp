@@ -34,7 +34,7 @@ namespace Neo4j_Wrapper {
         int insert(const char *node_type, int num_arguments, char **arguments);
 
         int insert_pdg_edge(string node_source_label, string edge_label,
-                            string node_dest_label);
+                            string node_dest_label, string program_name);
 
         int insert_pdg_node(string label, string node_type, string instruction, string function_name, string program_name);
 
