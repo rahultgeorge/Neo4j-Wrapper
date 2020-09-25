@@ -71,11 +71,11 @@ int Neo4j_Wrapper::Neo4j_Connector::insert_pdg_node(string label, string node_ty
     debugLocationValue = neo4j_string(debugLocation.c_str());
 
     mapEntries[0] = neo4j_map_entry("label", labelValue);
-    mapEntries[1] = neo4j_map_entry("node_type", nodeTypeValue);
-    mapEntries[2] = neo4j_map_entry("instruction", instructionValue);
-    mapEntries[3] = neo4j_map_entry("debug_location", debugLocationValue);
-    mapEntries[4] = neo4j_map_entry("function_name", functionNameValue);
-    mapEntries[5] = neo4j_map_entry("program_name", programNameValue);
+    mapEntries[1] = neo4j_map_entry("program_name", programNameValue);
+    mapEntries[2] = neo4j_map_entry("node_type", nodeTypeValue);
+    mapEntries[3] = neo4j_map_entry("instruction", instructionValue);
+    mapEntries[4] = neo4j_map_entry("debug_location", debugLocationValue);
+    mapEntries[5] = neo4j_map_entry("function_name", functionNameValue);
 
     mapEntries[6] = neo4j_map_entry("node_type_2", nodeTypeValue);
     mapEntries[7] = neo4j_map_entry("instruction_2", instructionValue);
@@ -84,7 +84,7 @@ int Neo4j_Wrapper::Neo4j_Connector::insert_pdg_node(string label, string node_ty
     mapEntries[10] = neo4j_map_entry("program_name_2", programNameValue);
 
 
-    string statement = "MERGE (n:ProgramInstruction{label:$label}) ON MATCH SET n.type=$node_type, n.instruction=$instruction , n.debug_location=$debug_location, n.function_name=$function_name, n.program_name= $program_name ON CREATE SET  n.type=$node_type_2, n.instruction=$instruction_2 , n.debug_location=$debug_location_2, n.function_name=$function_name_2, n.program_name= $program_name_2";
+    string statement = "MERGE (n:ProgramInstruction{label:$label, program_name= $program_name}) ON MATCH SET n.type=$node_type, n.instruction=$instruction , n.debug_location=$debug_location, n.function_name=$function_name ON CREATE SET  n.type=$node_type_2, n.instruction=$instruction_2 , n.debug_location=$debug_location_2, n.function_name=$function_name_2, n.program_name= $program_name_2";
 
     neo4j_value_t params = neo4j_map(mapEntries, 11);
 
